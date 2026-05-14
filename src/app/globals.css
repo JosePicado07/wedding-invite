@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Palette — Deep Burgundy, Olive, Chocolate, Terracotta, Moss, Champagne */
+  --bg: #F7F2EA;          /* warm linen — light anchor for the dark palette */
+  --text: #4A3A2A;        /* Chocolate Brown */
+  --accent: #6E1F2A;      /* Deep Burgundy — primary brand colour */
+  --sage: #7A845A;        /* Olive Green */
+  --terracotta: #A4573A;  /* Rusty Terracotta */
+  --moss: #556B2F;        /* Moss Green */
+  --muted: #B7B08A;       /* Champagne Taupe — dividers, captions */
+  --cream-light: #F7F2EA; /* same as --bg, for text on dark surfaces */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: url('/assets/bg-pattern.jpg');
+  background-repeat: repeat;
+  background-size: 420px;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+}
+
+/* Respect reduced motion preference (CSS fallback for non-JS animations) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
