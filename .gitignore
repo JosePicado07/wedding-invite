@@ -19,3 +19,12 @@ tsconfig.tsbuildinfo
 
 # vercel
 .vercel
+
+# loose source media in project root (the used copy lives in public/assets/)
+/*.mp3
+
+# local Claude tooling
+.claude/
+
+# raw source photos (optimized copies live in public/assets/)
+/assets/

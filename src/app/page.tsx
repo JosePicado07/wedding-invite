@@ -5,15 +5,19 @@ import DetailsSoon from '@/app/components/DetailsSoon'
 import VenueSection from '@/app/components/VenueSection'
 import EasterEgg from '@/app/components/EasterEgg'
 import PenguinSection from '@/app/components/PenguinSection'
+import DietaryForm from '@/app/components/DietaryForm'
+import MusicPlayer from '@/app/components/MusicPlayer'
 
 export default function Home() {
   return (
     <main>
+      <MusicPlayer />
       <Hero />
       <PhotoCarousel />
       <CountdownTimer />
       <DetailsSoon />
       <VenueSection />
+      <DietaryForm />
       <PenguinSection />
       <footer className="py-10 text-center bg-[#F7F2EA]/85 backdrop-blur-[2px]">
         <EasterEgg />
