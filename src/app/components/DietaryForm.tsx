@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 
-// Formspree endpoint — set NEXT_PUBLIC_FORMSPREE_ID in your Vercel env vars.
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID
-const ENDPOINT = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : ''
+// Formspree endpoint. The ID ships in the client bundle anyway (NEXT_PUBLIC),
+// so we hardcode a default and let an env var override it if ever needed.
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'mqeobarz'
+const ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
