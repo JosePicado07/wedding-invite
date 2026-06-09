@@ -34,7 +34,10 @@ export default function DietaryForm() {
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { Accept: 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           nombre: name.trim(),
           restriccion: hasRestriction ? 'Sí' : 'No',
