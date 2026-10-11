@@ -76,6 +76,16 @@ export const accommodations = {
       detail: 'San Rafael de Heredia · zona de camping y miradores cerca',
       url: 'https://www.airbnb.com/rooms/1331517988394319846',
     },
+    {
+      name: 'Cabaña de Montaña boutique #1 — EyB Chalets',
+      detail: 'San Rafael de Heredia',
+      url: 'https://www.airbnb.com/rooms/9327868',
+    },
+    {
+      name: 'Cabaña de Montaña boutique #3 — EyB Chalets',
+      detail: 'San Rafael de Heredia',
+      url: 'https://www.airbnb.com/rooms/991232084004603815',
+    },
   ],
 }
 
