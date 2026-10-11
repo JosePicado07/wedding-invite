@@ -61,7 +61,7 @@ export default function CountdownTimer() {
             >
               {String(timeLeft[key]).padStart(2, '0')}
             </m.span>
-            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--muted)]">
+            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--muted-ink)]">
               {label}
             </span>
           </div>

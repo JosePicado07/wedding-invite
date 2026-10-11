@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Nunito } from 'next/font/google'
 import Providers from '@/app/components/Providers'
 import './globals.css'
@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     description: 'January 16th, 2027',
     type: 'website',
   },
+}
+
+// Declares this site as light-only so mobile browsers (e.g. Chrome's "force
+// dark" theming) don't algorithmically recolor the custom palette.
+export const viewport: Viewport = {
+  colorScheme: 'light',
 }
 
 export default function RootLayout({

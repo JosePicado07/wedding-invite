@@ -37,7 +37,7 @@ export default function PenguinSection() {
         <Script src="https://tenor.com/embed.js" strategy="lazyOnload" />
       </div>
 
-      <p className="font-body text-[9px] tracking-[0.35em] uppercase text-[var(--muted)] mt-8">
+      <p className="font-body text-[9px] tracking-[0.35em] uppercase text-[var(--muted-ink)] mt-8">
         Nos vemos el 16 de enero de 2027
       </p>
     </m.section>

@@ -29,3 +29,9 @@ Warm, intimate, unhurried. Handcrafted and personal, never corporate. Romantic w
 2. Less is more — every element earns its place
 3. Mobile-first, thumb-zone-aware
 4. Performance — opened on mobile data, keep it fast
+
+## Surfaces
+- `/` — the original save-the-date. A single-page teaser/announcement and keepsake (Hero, photo carousel, countdown, venue, a dietary-only form, playful extras). Unchanged in scope; not superseded.
+- `/invitacion` — the full wedding invitation. A formal, self-contained document: host/request line, full ceremony logistics (date, time, venue), schedule, dress code (with suggested color palette), accommodations note, gift note, and a complete RSVP (attending, guest count, meal choice, dietary notes).
+- Both surfaces share the same brand register and design tokens (`DESIGN.md`), but `/invitacion`'s copy is formal/ceremonial while `/` stays playful/anticipatory.
+- Both forms (`DietaryForm` on `/`, `RsvpForm` on `/invitacion`) POST to the same Formspree endpoint/env var, distinguishable by field shape (`restriccion`/`detalle` vs. `asiste`/`acompanantes`/`platillo`).

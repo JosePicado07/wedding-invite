@@ -37,7 +37,7 @@ function DiamondRule() {
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[100svh] flex flex-col items-center justify-center px-8 overflow-hidden"
+      className="relative isolate min-h-[100svh] flex flex-col items-center justify-center px-8 overflow-hidden"
     >
       {/* Screen-reader heading — full semantic content */}
       <h1 className="sr-only">
@@ -112,7 +112,7 @@ export default function Hero() {
         {/* ── are getting married ── */}
         <m.span
           variants={lineVariants}
-          className="font-display italic text-[var(--muted)] leading-snug mt-4 text-balance"
+          className="font-display italic text-[var(--muted-ink)] leading-snug mt-4 text-balance"
           style={{ fontSize: 'clamp(1.1rem, 4.8vw, 1.9rem)' }}
         >
           se van a casar

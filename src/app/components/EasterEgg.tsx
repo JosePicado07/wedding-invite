@@ -86,7 +86,7 @@ export default function EasterEgg() {
     <>
       <button
         onClick={handleTap}
-        className="font-display text-2xl text-[var(--muted)] italic select-none cursor-default focus:outline-none"
+        className="font-display text-2xl text-[var(--muted-ink)] italic select-none cursor-default focus:outline-none"
         aria-label="M and J"
       >
         M &amp; J

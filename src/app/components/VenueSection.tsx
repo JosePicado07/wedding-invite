@@ -2,16 +2,30 @@
 
 import { m } from 'framer-motion'
 
-export default function VenueSection() {
+export default function VenueSection({
+  time,
+  fadeIn = true,
+}: {
+  time?: string
+  /** `/invitacion` sits this section directly against ScheduleSection, whose
+   * curved edge continues this one's — independent scroll-triggered fades on
+   * two sections sharing one visual seam can catch one mid-transition while
+   * the other's settled, showing a seam. Disabled there; `/` keeps the fade
+   * since its neighbor there isn't a shared continuous shape. */
+  fadeIn?: boolean
+}) {
   return (
     <m.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9 }}
+      initial={fadeIn ? { opacity: 0 } : undefined}
+      whileInView={fadeIn ? { opacity: 1 } : undefined}
+      viewport={fadeIn ? { once: true } : undefined}
+      transition={fadeIn ? { duration: 0.9 } : undefined}
       className="relative px-6 py-24 overflow-hidden bg-[var(--text)]"
     >
-      {/* Organic concave top edge */}
+      {/* Organic concave top edge. The cream fill carries the same dimmed
+          wallpaper pattern as the rest of the page (see body::before in
+          globals.css) — a flat var(--bg) alone reads as a visibly different,
+          flatter shade than the textured cream around it. */}
       <div
         className="absolute inset-x-0 -top-px"
         aria-hidden="true"
@@ -20,7 +34,20 @@ export default function VenueSection() {
           background: 'var(--bg)',
           clipPath: 'ellipse(60% 100% at 50% 0%)',
         }}
-      />
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/assets/bg-pattern.jpg')",
+            backgroundRepeat: 'repeat',
+            backgroundSize: '420px',
+            opacity: 0.05,
+          }}
+        />
+      </div>
+
+      {/* Bottom edge: rendered by <SectionSeam /> between this section and
+          ScheduleSection — see that component for why. */}
 
       {/* Atmospheric blobs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -45,7 +72,7 @@ export default function VenueSection() {
         </p>
 
         <p className="font-body text-[12px] tracking-[0.28em] uppercase text-[var(--cream-light)] font-medium mb-12">
-          16 de enero de 2027
+          16 de enero de 2027{time ? ` · ${time}` : ''}
         </p>
 
         {/* Button uses cream-light so it's visible on the dark brown background */}

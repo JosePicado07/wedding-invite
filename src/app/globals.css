@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
   /* Palette — Deep Burgundy, Olive, Chocolate, Terracotta, Moss, Champagne */
   --bg: #F7F2EA;          /* warm linen — light anchor for the dark palette */
   --text: #4A3A2A;        /* Chocolate Brown */
   --accent: #6E1F2A;      /* Deep Burgundy — primary brand colour */
-  --sage: #7A845A;        /* Olive Green */
+  --sage: #5A6142;        /* Olive Green — darkened from #7A845A for AA contrast as text on --bg */
   --terracotta: #A4573A;  /* Rusty Terracotta */
   --moss: #556B2F;        /* Moss Green */
-  --muted: #B7B08A;       /* Champagne Taupe — dividers, captions */
+  --muted: #B7B08A;       /* Champagne Taupe — dividers, and text on dark surfaces only */
+  --muted-ink: #5F5939;   /* Champagne Taupe, darkened — text on --bg (AA contrast); --muted itself fails at ~2:1 there */
   --cream-light: #F7F2EA; /* same as --bg, for text on dark surfaces */
 }
 
@@ -25,14 +27,29 @@ html {
 }
 
 body {
+  position: relative;
   background-color: var(--bg);
-  background-image: url('/assets/bg-pattern.jpg');
-  background-repeat: repeat;
-  background-size: 420px;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/*
+ * Wallpaper pattern, dimmed on its own layer (rather than applied at full
+ * strength on `body`) so it can run consistently under every section —
+ * including translucent ones — without the figures competing with text.
+ */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/bg-pattern.jpg');
+  background-repeat: repeat;
+  background-size: 420px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Grain texture overlay */
