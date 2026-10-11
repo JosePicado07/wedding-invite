@@ -125,6 +125,6 @@ export const ourStory = {
   },
   wedding: {
     label: 'Nuestra boda',
-    text: 'El 17 de enero de 2026 decidimos casarnos, en una celebración íntima, solo para nosotros dos. Hoy queremos compartir con ustedes la alegría de celebrar nuestra unión y esta nueva etapa de nuestras vidas.',
+    text: 'En enero del 2026 decidimos casarnos, en una celebración íntima, solo para nosotros dos. Hoy queremos compartir con ustedes la alegría de celebrar nuestra unión y esta nueva etapa de nuestras vidas.',
   },
 }

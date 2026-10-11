@@ -3,6 +3,8 @@
 import { m } from 'framer-motion'
 import { venue } from '@/data/invitation'
 import SwipeToContinue from '@/app/components/SwipeToContinue'
+import InviteMusicNote from '@/app/components/InviteMusicNote'
+import AddToCalendar from '@/app/components/AddToCalendar'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -116,6 +118,20 @@ export default function InviteHero() {
             {venue.name}, {venue.location}
           </span>
         </m.div>
+      </m.div>
+
+      {/* Music + calendar — real interactive controls, so these sit outside
+          the decorative (aria-hidden) block above rather than nested in it;
+          aria-hidden doesn't reliably un-hide for descendants once set on
+          an ancestor. */}
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.8, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-sm mx-auto flex flex-col gap-4 mt-8 pl-6 sm:pl-10"
+      >
+        <InviteMusicNote />
+        <AddToCalendar />
       </m.div>
 
       {/* Swipe gesture — jumps straight to the RSVP form */}

@@ -20,6 +20,10 @@ tsconfig.tsbuildinfo
 # vercel
 .vercel
 
+# cloudflare / opennext
+.open-next/
+.wrangler/
+
 # loose source media in project root (the used copy lives in public/assets/)
 /*.mp3
 

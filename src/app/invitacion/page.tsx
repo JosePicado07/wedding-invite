@@ -7,7 +7,6 @@ import SectionSeam from '@/app/components/SectionSeam'
 import ScheduleSection from '@/app/components/ScheduleSection'
 import DetailsCard from '@/app/components/DetailsCard'
 import RsvpForm from '@/app/components/RsvpForm'
-import MusicPlayer from '@/app/components/MusicPlayer'
 import EasterEgg from '@/app/components/EasterEgg'
 import { venue } from '@/data/invitation'
 
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
 export default function Invitacion() {
   return (
     <main>
-      <MusicPlayer />
       <InviteHero />
 
       <IllustrationDivider
