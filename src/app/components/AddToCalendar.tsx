@@ -1,32 +1,7 @@
-'use client'
-
-import { venue } from '@/data/invitation'
-
-// Costa Rica is UTC-6 year-round (no DST), so local times convert to a
-// fixed UTC offset — no VTIMEZONE block needed for a single-event .ics.
-const ICS_LINES = [
-  'BEGIN:VCALENDAR',
-  'VERSION:2.0',
-  'PRODID:-//Michelle & Jose Wedding//ES',
-  'BEGIN:VEVENT',
-  'UID:michelle-jose-wedding-2027@invitacion',
-  'DTSTAMP:20261001T000000Z',
-  'DTSTART:20270116T223000Z',
-  'DTEND:20270117T040000Z',
-  `SUMMARY:Boda de Michelle & Jose`,
-  `DESCRIPTION:Ceremonia y recepción en ${venue.name}, ${venue.location}.`,
-  `LOCATION:${venue.name}, ${venue.location}`,
-  'END:VEVENT',
-  'END:VCALENDAR',
-].join('\r\n')
-
-const ICS_HREF = `data:text/calendar;charset=utf8,${encodeURIComponent(ICS_LINES)}`
-
 export default function AddToCalendar() {
   return (
     <a
-      href={ICS_HREF}
-      download="boda-michelle-jose.ics"
+      href="/calendario.ics"
       className="flex items-center gap-3 text-left group"
     >
       <svg
