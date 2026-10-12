@@ -1,6 +1,7 @@
 export type Guest = {
   name: string
   plusOne: boolean
+  aliases?: string[]
 }
 
 // Fuente: lista de invitados completa provista por los novios (nombre y
@@ -78,6 +79,7 @@ export const guests: Guest[] = [
   { name: 'Fabiana Segura', plusOne: false },
   { name: 'Dayana Zambrano', plusOne: false },
   { name: 'Karol Mata', plusOne: false },
+  { name: 'Elizzett Corrales', plusOne: false, aliases: ['Ely Corrales'] },
 ]
 
 function normalize(value: string): string {
@@ -105,31 +107,38 @@ function levenshtein(a: string, b: string): number {
 }
 
 // Guests rarely type their name exactly as listed (missing an accent, a
-// shortened first name, a typo). This resolves loosely, but only commits to
-// a match when it's unambiguous — anything uncertain falls back to the
-// honor-system toggle rather than risk denying someone their +1.
+// shortened first name, a typo, or a nickname covered by `aliases`). This
+// resolves loosely, but only commits to a match when it's unambiguous —
+// anything uncertain is left unmatched (no +1 granted by default).
 export function findGuest(name: string): Guest | null {
   const target = normalize(name)
   if (!target) return null
 
-  const exact = guests.find((g) => normalize(g.name) === target)
+  const namesOf = (g: Guest) => [g.name, ...(g.aliases ?? [])]
+
+  const exact = guests.find((g) => namesOf(g).some((n) => normalize(n) === target))
   if (exact) return exact
 
   const targetTokens = target.split(' ').filter(Boolean)
-  const containment = guests.filter((g) => {
-    const gTokens = normalize(g.name).split(' ').filter(Boolean)
-    return (
-      targetTokens.every((t) => gTokens.includes(t)) ||
-      gTokens.every((t) => targetTokens.includes(t))
-    )
-  })
+  const containment = guests.filter((g) =>
+    namesOf(g).some((n) => {
+      const gTokens = normalize(n).split(' ').filter(Boolean)
+      return (
+        targetTokens.every((t) => gTokens.includes(t)) ||
+        gTokens.every((t) => targetTokens.includes(t))
+      )
+    })
+  )
   if (containment.length === 1) return containment[0]
   if (containment.length > 1) {
     return containment.every((g) => g.plusOne === containment[0].plusOne) ? containment[0] : null
   }
 
   const scored = guests
-    .map((g) => ({ guest: g, distance: levenshtein(target, normalize(g.name)) }))
+    .map((g) => ({
+      guest: g,
+      distance: Math.min(...namesOf(g).map((n) => levenshtein(target, normalize(n)))),
+    }))
     .sort((a, b) => a.distance - b.distance)
   const [best, second] = scored
   const threshold = Math.max(1, Math.floor(target.length * 0.3))
