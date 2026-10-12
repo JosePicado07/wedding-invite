@@ -87,12 +87,12 @@ export default function RsvpForm() {
   // Unmatched names no longer default to allowing a +1 — only guests the
   // couple explicitly listed with plusOne: true get the companion option.
   const companionAllowed = matchedGuest ? matchedGuest.plusOne : false
-
-  useEffect(() => {
-    if (!companionAllowed && hasCompanion !== false) {
-      setHasCompanion(false)
-    }
-  }, [companionAllowed, hasCompanion])
+  // Derived, not stateful — a `useEffect` that forced `hasCompanion` to false
+  // here only fires on a true→false *transition*, so it silently never ran
+  // for anyone whose invitation starts out individual (the common case now
+  // that unmatched names default to no +1), leaving `hasCompanion` stuck at
+  // `null` and the submit button permanently disabled for them.
+  const effectiveHasCompanion = companionAllowed ? hasCompanion : false
 
   // Clearing the name should also clear whatever the guest-list match revealed —
   // otherwise a stale +1 selection can linger after the name that produced it is gone.
@@ -108,9 +108,10 @@ export default function RsvpForm() {
     hasFullName(name) &&
     attending !== null &&
     (attending === false ||
-      (hasCompanion !== null &&
+      (effectiveHasCompanion !== null &&
         drinksAlcohol !== null &&
-        (hasCompanion === false || (hasFullName(companionName) && companionDrinksAlcohol !== null)))) &&
+        (effectiveHasCompanion === false ||
+          (hasFullName(companionName) && companionDrinksAlcohol !== null)))) &&
     status !== 'submitting'
 
   async function handleSubmit(e: React.FormEvent) {
@@ -133,9 +134,10 @@ export default function RsvpForm() {
         body: JSON.stringify({
           nombre: name.trim(),
           asiste: attending ? 'Sí' : 'No',
-          acompanante: attending && hasCompanion ? companionName.trim() : '—',
+          acompanante: attending && effectiveHasCompanion ? companionName.trim() : '—',
           alcohol: attending ? (drinksAlcohol ? 'Sí' : 'No') : '—',
-          alcoholAcompanante: attending && hasCompanion ? (companionDrinksAlcohol ? 'Sí' : 'No') : '—',
+          alcoholAcompanante:
+            attending && effectiveHasCompanion ? (companionDrinksAlcohol ? 'Sí' : 'No') : '—',
           notasDieteticas: attending ? dietaryNotes.trim() || '—' : '—',
         }),
       })
