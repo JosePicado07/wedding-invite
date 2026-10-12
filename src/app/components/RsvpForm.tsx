@@ -84,7 +84,9 @@ export default function RsvpForm() {
 
   // Matched against the couple's guest list — unmatched names fall back to the honor system.
   const matchedGuest = useMemo(() => findGuest(name), [name])
-  const companionAllowed = matchedGuest ? matchedGuest.plusOne : true
+  // Unmatched names no longer default to allowing a +1 — only guests the
+  // couple explicitly listed with plusOne: true get the companion option.
+  const companionAllowed = matchedGuest ? matchedGuest.plusOne : false
 
   useEffect(() => {
     if (!companionAllowed && hasCompanion !== false) {
@@ -179,7 +181,10 @@ export default function RsvpForm() {
             <p className="font-body text-sm text-[var(--text)] opacity-70 leading-relaxed">
               Nos encantaría saber si nos acompañarás en este día tan especial.
             </p>
-            <p className="font-body text-[11px] text-[var(--accent)] opacity-80 leading-relaxed mt-3">
+            <p className="font-body text-[11px] text-[var(--sage)] opacity-90 leading-relaxed mt-3">
+              Por favor confirma antes del 30 de noviembre de 2026.
+            </p>
+            <p className="font-body text-[11px] text-[var(--accent)] opacity-80 leading-relaxed mt-2">
               Este es un evento solo para adultos, agradecemos tu comprensión.
             </p>
           </div>
@@ -261,7 +266,8 @@ export default function RsvpForm() {
                 )}
                 {hasFullName(name) && !matchedGuest && (
                   <span className="font-body text-[11px] text-[var(--sage)] opacity-90 block mt-2">
-                    No encontramos tu nombre en la lista de invitados, pero puedes continuar igual.
+                    No encontramos tu nombre en la lista de invitados, pero puedes continuar igual. Si la
+                    invitación incluye acompañante, escríbenos para confirmarlo.
                   </span>
                 )}
               </label>
@@ -295,11 +301,9 @@ export default function RsvpForm() {
                         onChange={setHasCompanion}
                       />
                     ) : (
-                      matchedGuest && (
-                        <p className="font-body text-[11px] text-[var(--text)] opacity-50 leading-relaxed mb-6">
-                          Tu invitación es individual.
-                        </p>
-                      )
+                      <p className="font-body text-[11px] text-[var(--text)] opacity-50 leading-relaxed mb-6">
+                        Tu invitación es individual.
+                      </p>
                     )}
 
                     <AnimatePresence>
