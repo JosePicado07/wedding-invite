@@ -167,6 +167,9 @@ export default function RsvpForm() {
             <p className="font-body text-sm text-[var(--text)] opacity-70 leading-relaxed">
               Nos encantaría saber si nos acompañarás en este día tan especial.
             </p>
+            <p className="font-body text-[11px] text-[var(--accent)] opacity-80 leading-relaxed mt-3">
+              Este es un evento solo para adultos, agradecemos tu comprensión.
+            </p>
           </div>
         </div>
 

@@ -1,7 +1,6 @@
 export const dressCode = {
   headline: 'Formal',
   note: 'Sugerencia de paleta para inspirar tu outfit, no una regla estricta.',
-  kidsNote: 'Este es un evento solo para adultos, agradecemos tu comprensión.',
   forbidden: {
     headline: 'Colores a evitar',
     colors: [
