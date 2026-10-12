@@ -17,7 +17,7 @@ export const guests: Guest[] = [
   { name: 'Javier Badilla', plusOne: true },
   { name: 'Daniel Anchia', plusOne: true },
   { name: 'Rosa Sanchez', plusOne: false },
-  { name: 'Eduardo Campos', plusOne: false },
+  { name: 'Eduardo Campos Rodriguez', plusOne: false },
   { name: 'Sebastian Marin', plusOne: false },
   { name: 'Yanira Barrera', plusOne: false },
   { name: 'Irlanda Hernandez', plusOne: true },
