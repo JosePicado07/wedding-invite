@@ -116,6 +116,10 @@ export default function DetailsCard() {
             </p>
             <ColorRow colors={dressCode.forbidden.colors} forbidden />
           </div>
+
+          <p className="font-body text-[11px] text-[var(--accent)] opacity-80 leading-relaxed mt-6">
+            {dressCode.kidsNote}
+          </p>
         </DetailBlock>
 
         <DetailBlock index={2} eyebrow={menu.headline}>
