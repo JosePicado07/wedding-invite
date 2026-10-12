@@ -69,6 +69,18 @@ export default function RsvpForm() {
   const [companionDrinksAlcohol, setCompanionDrinksAlcohol] = useState<boolean | null>(null)
   const [dietaryNotes, setDietaryNotes] = useState('')
   const [status, setStatus] = useState<Status>('idle')
+  const [showSlowNotice, setShowSlowNotice] = useState(false)
+
+  // Formspree sometimes takes several seconds to respond — only reassure the
+  // guest once the wait is actually noticeable, not on every fast submit.
+  useEffect(() => {
+    if (status !== 'submitting') {
+      setShowSlowNotice(false)
+      return
+    }
+    const timer = setTimeout(() => setShowSlowNotice(true), 2500)
+    return () => clearTimeout(timer)
+  }, [status])
 
   // Matched against the couple's guest list — unmatched names fall back to the honor system.
   const matchedGuest = useMemo(() => findGuest(name), [name])
@@ -349,6 +361,20 @@ export default function RsvpForm() {
                   Algo salió mal. Por favor inténtalo de nuevo.
                 </p>
               )}
+
+              <AnimatePresence>
+                {showSlowNotice && (
+                  <m.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="font-body text-[11px] text-[var(--text)] opacity-60 mb-4 text-center"
+                  >
+                    Casi listo, puede tardar unos segundos…
+                  </m.p>
+                )}
+              </AnimatePresence>
 
               <m.button
                 type="submit"
